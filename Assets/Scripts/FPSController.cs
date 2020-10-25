@@ -203,7 +203,7 @@ public class FPSController : MonoBehaviour
             var muzzleObject = Instantiate(muzzle, firePoint.position, Quaternion.identity) as GameObject;
 
             Destroy(muzzleObject, 1);
-            Destroy(projectileObject, 10);
+           //Destroy(projectileObject, 10);
         }
     }
 
@@ -228,7 +228,7 @@ public class FPSController : MonoBehaviour
             var muzzleObject = Instantiate(rocketMuzzle, firePoint.position, Quaternion.identity) as GameObject;
 
             Destroy(muzzleObject, 1);
-            Destroy(projectileObject, 10);
+            //Destroy(projectileObject, 10);
         }
     }
 }

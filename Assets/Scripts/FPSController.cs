@@ -199,13 +199,13 @@ public class FPSController : MonoBehaviour
 
             var mainBlaster = blasterParticleSystem.main;
             
-            if (chargedShotTimer > 3)
+            if (chargedShotTimer < 3)
             {
-                mainBlaster.startSize = 5.0f;
+                mainBlaster.startSize = 1.0f;
             }
             else
             {
-                mainBlaster.startSize = chargedShotTimer * 3;
+                mainBlaster.startSize = chargedShotTimer;
             }
 
             chargedShotTimer = 0;

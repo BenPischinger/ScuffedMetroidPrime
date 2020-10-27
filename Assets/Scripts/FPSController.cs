@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class FPSController : MonoBehaviour
 {
@@ -23,24 +24,30 @@ public class FPSController : MonoBehaviour
     public float dashDuration;
     public float dashCooldown;
 
+    public Transform armCannon;
+    private Vector3 armCannonLocalPos;
     public Transform firePoint;
     public GameObject blasterProjectile;
     private ParticleSystem blasterParticleSystem;
+    public GameObject chargeProjectile;
+    private ParticleSystem chargeParticleSystem;
     public float blasterProjectileSpeed;
     private Vector3 projectileDestination;
-    public GameObject muzzle;
     private float chargedShotTimer = 0;
 
     public GameObject rocketProjectile;
     public float rocketProjectileSpeed;
-    public GameObject rocketMuzzle;
     Quaternion tempQuaternion;
+
+    public float punchStrenght = 0.2f;
+    public int punchVibrato = 5;
+    public float punchDuration = 0.3f;
+    public float punchElasticity = 0.5f;
 
     bool canMove = true;
     bool canDoubleJump = false;
     bool canDash = true;
     bool canShoot = true;
-
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +58,9 @@ public class FPSController : MonoBehaviour
 
         samus = GetComponent<CharacterController>();
         blasterParticleSystem = blasterProjectile.GetComponent<ParticleSystem>();
+        chargeParticleSystem = chargeProjectile.GetComponent<ParticleSystem>();
+
+        armCannonLocalPos = armCannon.localPosition;
 
         numberOfDashes = maxNumberOfDashes;
     }
@@ -65,11 +75,11 @@ public class FPSController : MonoBehaviour
 
         MovementController();
 
-        FireBlaster();
+        ShootBlaster();
 
         tempQuaternion = samus.transform.rotation;
 
-        FireRocket();
+        ShootRocket();
     }
 
     void MovementController()
@@ -162,26 +172,40 @@ public class FPSController : MonoBehaviour
 
     // Fires the blaster. Fire1, left click, can be charged to fire a bigger shot
     // Raycast checks if the projectile hits anything and destroys it
-    void FireBlaster()
+    void ShootBlaster()
     {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            chargeParticleSystem.Play();
+        }
+
         if (Input.GetButton("Fire1") && canShoot)
         {
             chargedShotTimer += Time.deltaTime;
-           
+
+            armCannon.DOLocalMoveZ(armCannonLocalPos.z - 0.22f, punchDuration);
         }
 
-        if(Input.GetButtonUp("Fire1") && canShoot)
+        if (Input.GetButtonUp("Fire1") && canShoot)
         {
+            chargeParticleSystem.Clear();
+            chargeParticleSystem.Stop();
+
+            Sequence doTweenSequence = DOTween.Sequence();
+            doTweenSequence.Append(armCannon.DOPunchPosition(new Vector3(0, 0, -punchStrenght), punchDuration, punchVibrato, punchElasticity));
+            doTweenSequence.Join(armCannon.DOLocalMove(armCannonLocalPos, punchDuration).SetDelay(punchDuration));
+            armCannon.DOComplete();
+            armCannon.DOPunchPosition(new Vector3(0, 0, -punchStrenght), punchDuration, punchVibrato, punchElasticity);
+
+            var mainBlaster = blasterParticleSystem.main;
             
             if (chargedShotTimer > 3)
             {
-                var main = blasterParticleSystem.main;
-                main.startSize = 10.0f;
+                mainBlaster.startSize = 5.0f;
             }
             else
             {
-                var main = blasterParticleSystem.main;
-                main.startSize = chargedShotTimer * 3;
+                mainBlaster.startSize = chargedShotTimer * 3;
             }
 
             chargedShotTimer = 0;
@@ -200,14 +224,11 @@ public class FPSController : MonoBehaviour
 
             var projectileObject = Instantiate(blasterProjectile, firePoint.position, Quaternion.identity) as GameObject;
             projectileObject.GetComponent<Rigidbody>().velocity = (projectileDestination - firePoint.position).normalized * blasterProjectileSpeed;
-            var muzzleObject = Instantiate(muzzle, firePoint.position, Quaternion.identity) as GameObject;
-
-            Destroy(muzzleObject, 1);
-           //Destroy(projectileObject, 10);
         }
     }
 
-    void FireRocket()
+    // Similar to the blaster fire, but for rockets
+    void ShootRocket()
     {
         if (Input.GetButtonUp("Fire2") && canShoot)
         {
@@ -225,10 +246,6 @@ public class FPSController : MonoBehaviour
 
             var projectileObject = Instantiate(rocketProjectile, firePoint.position, tempQuaternion) as GameObject;
             projectileObject.GetComponent<Rigidbody>().velocity = (projectileDestination - firePoint.position).normalized * rocketProjectileSpeed;
-            var muzzleObject = Instantiate(rocketMuzzle, firePoint.position, Quaternion.identity) as GameObject;
-
-            Destroy(muzzleObject, 1);
-            //Destroy(projectileObject, 10);
         }
     }
 }

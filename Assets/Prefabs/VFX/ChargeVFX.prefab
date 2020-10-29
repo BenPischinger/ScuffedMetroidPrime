@@ -40,7 +40,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3214531904729540701}
   serializedVersion: 6
-  lengthInSec: 3
+  lengthInSec: 2
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -115,7 +115,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -4856,11 +4856,11 @@ ParticleSystemRenderer:
   m_RenderAlignment: 0
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
-  m_UseCustomVertexStreams: 0
+  m_UseCustomVertexStreams: 1
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
-  m_VertexStreams: 00010304
+  m_VertexStreams: 000304
   m_Mesh: {fileID: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
@@ -4921,7 +4921,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 3
+    scalar: 2
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -9677,11 +9677,11 @@ ParticleSystemRenderer:
   m_RenderAlignment: 0
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
-  m_UseCustomVertexStreams: 0
+  m_UseCustomVertexStreams: 1
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
-  m_VertexStreams: 00010304
+  m_VertexStreams: 000304
   m_Mesh: {fileID: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
@@ -9698,6 +9698,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ChargeVFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806042801454460311, guid: 0b3a67444c039f2468fcac16471687d6,
+        type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1806042801454460311, guid: 0b3a67444c039f2468fcac16471687d6,
         type: 3}
@@ -9724,6 +9729,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5968af2dff98b974d8bcdeabf7329eb8, type: 2}
+    - target: {fileID: 1806042801454460311, guid: 0b3a67444c039f2468fcac16471687d6,
+        type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806042801454460311, guid: 0b3a67444c039f2468fcac16471687d6,
+        type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806042801454460311, guid: 0b3a67444c039f2468fcac16471687d6,
+        type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1922341331463986358, guid: 0b3a67444c039f2468fcac16471687d6,
         type: 3}
       propertyPath: m_IsActive
@@ -10277,7 +10297,7 @@ PrefabInstance:
     - target: {fileID: 7313955158843697600, guid: 0b3a67444c039f2468fcac16471687d6,
         type: 3}
       propertyPath: lengthInSec
-      value: 12
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7313955158843697600, guid: 0b3a67444c039f2468fcac16471687d6,
         type: 3}
@@ -10582,7 +10602,7 @@ PrefabInstance:
     - target: {fileID: 7313955158843697600, guid: 0b3a67444c039f2468fcac16471687d6,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7313955158843697600, guid: 0b3a67444c039f2468fcac16471687d6,
         type: 3}

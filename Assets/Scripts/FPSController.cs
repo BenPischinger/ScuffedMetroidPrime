@@ -12,37 +12,75 @@ public class FPSController : MonoBehaviour
     float lookSensitivity = 2.0f;
     public int FPS = 144;
 
+    [Space]
+
+    [Header("Movement Settings")]
     private Vector3 moveDirection = Vector3.zero;
     public float movementSpeed;
-
     public float jumpSpeed;
     public float gravity;
 
+    [Space]
+
+    [Header("Dash Settings")]
     public int maxNumberOfDashes;
     public int numberOfDashes;
     public float dashSpeed;
     public float dashDuration;
     public float dashCooldown;
 
-    public Transform armCannon;
-    private Vector3 armCannonLocalPos;
+    [Space]
+
+    [Header("Weapon Sway Settings")]
     public Transform firePoint;
-    public GameObject blasterProjectile;
-    private ParticleSystem blasterParticleSystem;
-    public GameObject chargeProjectile;
-    private ParticleSystem chargeParticleSystem;
-    public float blasterProjectileSpeed;
-    private Vector3 projectileDestination;
-    private float chargedShotTimer = 0;
+    public float swayAmount;
+    public float maxSwayAmount;
+    public float smoothSwayAmount;
 
-    public GameObject rocketProjectile;
-    public float rocketProjectileSpeed;
-    Quaternion tempQuaternion;
+    [Space]
 
+    [Header("DoTween Settings")]
     public float punchStrenght = 0.2f;
     public int punchVibrato = 5;
     public float punchDuration = 0.3f;
     public float punchElasticity = 0.5f;
+
+    [Space]
+    [Header("Blaster Settings")]
+    private float chargedShotTimer = 0;
+    private Vector3 projectileDestination;
+    public float weaponCooldown;
+
+    public Transform armCannon;
+    private Vector3 armCannonInitialPos;
+    private Vector3 armCannonLocalPos;
+
+    public GameObject blasterProjectile;
+    private ParticleSystem blasterParticleSystem;
+
+    public GameObject chargeProjectile;
+    private ParticleSystem chargeParticleSystem;
+
+    public ParticleSystem muzzleVFX;
+
+    public float blasterProjectileSpeed;
+
+    [Space]
+
+    [Header("Rocket Settings")]
+    public GameObject rocketProjectile;
+
+    public ParticleSystem rocketMuzzleVFX;
+
+    public float rocketProjectileSpeed;
+
+    [Space]
+
+    [Header("Pivots")]
+    public Transform mainPivot;
+    public Transform helmetPivot;
+
+    Quaternion tempQuaternion;
 
     bool canMove = true;
     bool canDoubleJump = false;
@@ -61,6 +99,7 @@ public class FPSController : MonoBehaviour
         chargeParticleSystem = chargeProjectile.GetComponent<ParticleSystem>();
 
         armCannonLocalPos = armCannon.localPosition;
+        armCannonInitialPos = armCannon.localPosition;
 
         numberOfDashes = maxNumberOfDashes;
     }
@@ -73,13 +112,31 @@ public class FPSController : MonoBehaviour
             canDash = false;
         }
 
+        UpdateView();
+
         MovementController();
+
+        WeaponSway();
 
         ShootBlaster();
 
         tempQuaternion = samus.transform.rotation;
 
         ShootRocket();
+    }
+
+    void UpdateView()
+    {
+        // Handle camera input and limit the angle
+        rotationX += -Input.GetAxis("Mouse Y") * lookSensitivity;
+        rotationX = Mathf.Clamp(rotationX, -60, 60);
+
+        firstPersonCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+
+        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSensitivity, 0);
+
+        mainPivot.transform.localRotation = firstPersonCamera.transform.localRotation;
+        helmetPivot.transform.localRotation = firstPersonCamera.transform.localRotation;
     }
 
     void MovementController()
@@ -98,11 +155,11 @@ public class FPSController : MonoBehaviour
         // Player is grounded, so they can jump and double jump as long as they are in mid air
         if (Input.GetButtonDown("Jump") && canMove && samus.isGrounded)
         {
-   
+
             canDoubleJump = true;
 
             moveDirection.y = jumpSpeed;
-            
+
         }
         else if (Input.GetButtonDown("Jump") && canMove && !samus.isGrounded && canDoubleJump)
         {
@@ -122,7 +179,7 @@ public class FPSController : MonoBehaviour
         }
 
         // Dash into movement direction
-        if(Input.GetKeyDown(KeyCode.LeftShift) && canMove && canDash)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canMove && canDash)
         {
             // Incresaes the movement speed for a split second to simulate a dash
             StartCoroutine(DashRoutine());
@@ -132,14 +189,6 @@ public class FPSController : MonoBehaviour
 
         // Move the player
         samus.Move(moveDirection * Time.deltaTime);
-
-        // Handle camera input and limit the angle
-        rotationX += -Input.GetAxis("Mouse Y") * lookSensitivity;
-        rotationX = Mathf.Clamp(rotationX, -70, 70);
-
-        firstPersonCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-
-        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSensitivity, 0);
 
     }
 
@@ -159,7 +208,7 @@ public class FPSController : MonoBehaviour
     // Coroutine to keep track of dash cooldown
     IEnumerator DashCooldownRoutine()
     {
-        
+
         yield return new WaitForSeconds(dashCooldown);
 
         if (numberOfDashes < maxNumberOfDashes)
@@ -174,11 +223,15 @@ public class FPSController : MonoBehaviour
     // Raycast checks if the projectile hits anything and destroys it
     void ShootBlaster()
     {
-        if (Input.GetButtonDown("Fire1"))
+        // Handles input for the left mouse button down
+        // Starts the animation for the charging of the blaster
+        if (Input.GetButtonDown("Fire1") && canShoot)
         {
             chargeParticleSystem.Play();
         }
 
+        // Handles input for when the left mouse button is held down
+        // Adds up the charge timer and punches the arm cannon back 
         if (Input.GetButton("Fire1") && canShoot)
         {
             chargedShotTimer += Time.deltaTime;
@@ -186,30 +239,32 @@ public class FPSController : MonoBehaviour
             armCannon.DOLocalMoveZ(armCannonLocalPos.z - 0.22f, punchDuration);
         }
 
+        // Handles input for when the left mouse buttin is let go
+        // Clears the charge particles, plays the muzzle flash and shoots the projectile
         if (Input.GetButtonUp("Fire1") && canShoot)
         {
+            StartCoroutine(WeaponCoolDown(weaponCooldown));
+
             chargeParticleSystem.Clear();
             chargeParticleSystem.Stop();
 
-            Sequence doTweenSequence = DOTween.Sequence();
-            doTweenSequence.Append(armCannon.DOPunchPosition(new Vector3(0, 0, -punchStrenght), punchDuration, punchVibrato, punchElasticity));
-            doTweenSequence.Join(armCannon.DOLocalMove(armCannonLocalPos, punchDuration).SetDelay(punchDuration));
-            armCannon.DOComplete();
-            armCannon.DOPunchPosition(new Vector3(0, 0, -punchStrenght), punchDuration, punchVibrato, punchElasticity);
+            muzzleVFX.Play();
+
+            DoTweenPunchBack();
 
             var mainBlaster = blasterParticleSystem.main;
-            
-            if (chargedShotTimer < 3)
+
+            if (chargedShotTimer < 2)
             {
                 mainBlaster.startSize = 1.0f;
             }
             else
             {
-                mainBlaster.startSize = chargedShotTimer;
+                mainBlaster.startSize = 3;
             }
 
             chargedShotTimer = 0;
-            
+
             Ray ray = firstPersonCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
             RaycastHit raycastHit;
 
@@ -230,8 +285,12 @@ public class FPSController : MonoBehaviour
     // Similar to the blaster fire, but for rockets
     void ShootRocket()
     {
-        if (Input.GetButtonUp("Fire2") && canShoot)
+        if (Input.GetButtonDown("Fire2") && canShoot)
         {
+            StartCoroutine(WeaponCoolDown(weaponCooldown));
+
+            DoTweenPunchBack();
+
             Ray ray = firstPersonCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
             RaycastHit raycastHit;
 
@@ -244,8 +303,39 @@ public class FPSController : MonoBehaviour
                 projectileDestination = ray.GetPoint(1000);
             }
 
+            rocketMuzzleVFX.Play();
+
             var projectileObject = Instantiate(rocketProjectile, firePoint.position, tempQuaternion) as GameObject;
             projectileObject.GetComponent<Rigidbody>().velocity = (projectileDestination - firePoint.position).normalized * rocketProjectileSpeed;
         }
+    }
+
+    IEnumerator WeaponCoolDown(float weaponCooldown)
+    {
+        canShoot = false;
+
+        yield return new WaitForSeconds(weaponCooldown);
+
+        canShoot = true;
+    }
+
+    void WeaponSway()
+    {
+        float movementX = -Input.GetAxis("Mouse X") * swayAmount;
+        float movementY = -Input.GetAxis("Mouse Y") * swayAmount;
+        movementX = Mathf.Clamp(movementX, -maxSwayAmount, maxSwayAmount);
+        movementY = Mathf.Clamp(movementY, -maxSwayAmount, maxSwayAmount);
+
+        Vector3 swayPosition = new Vector3(movementX, movementY, 0);
+        armCannon.localPosition = Vector3.Lerp(armCannon.localPosition, swayPosition + armCannonInitialPos, Time.deltaTime * smoothSwayAmount);
+    }
+
+    void DoTweenPunchBack()
+    {
+        Sequence doTweenSequence = DOTween.Sequence();
+        doTweenSequence.Append(armCannon.DOPunchPosition(new Vector3(0, 0, -punchStrenght), punchDuration, punchVibrato, punchElasticity));
+        doTweenSequence.Join(armCannon.DOLocalMove(armCannonLocalPos, punchDuration).SetDelay(punchDuration));
+        armCannon.DOComplete();
+        armCannon.DOPunchPosition(new Vector3(0, 0, -punchStrenght), punchDuration, punchVibrato, punchElasticity);
     }
 }

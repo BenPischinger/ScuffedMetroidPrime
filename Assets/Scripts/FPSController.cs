@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 
 public class FPSController : MonoBehaviour
@@ -46,6 +47,7 @@ public class FPSController : MonoBehaviour
     public float punchElasticity = 0.5f;
 
     [Space]
+
     [Header("Blaster Settings")]
     private float chargedShotTimer = 0;
     private Vector3 projectileDestination;
@@ -74,11 +76,25 @@ public class FPSController : MonoBehaviour
 
     public float rocketProjectileSpeed;
 
+    private int rocketAmount = 250;
+
     [Space]
 
     [Header("Pivots")]
     public Transform mainPivot;
     public Transform helmetPivot;
+
+    [Space]
+
+    [Header("UI Settings")]
+    public Image chargeBarImage;
+    public Image chargeBarChargingImage;
+    
+    public Image dashOffCooldownImage;
+    public Image dashOnCooldownImage;
+
+    public Transform rocketAmmoImage;
+    public Text rocketAmmoText;
 
     Quaternion tempQuaternion;
 
@@ -112,6 +128,8 @@ public class FPSController : MonoBehaviour
             canDash = false;
         }
 
+        tempQuaternion = samus.transform.rotation;
+
         UpdateView();
 
         MovementController();
@@ -120,9 +138,9 @@ public class FPSController : MonoBehaviour
 
         ShootBlaster();
 
-        tempQuaternion = samus.transform.rotation;
-
         ShootRocket();
+
+        UIDashCooldown();
     }
 
     void UpdateView()
@@ -208,6 +226,8 @@ public class FPSController : MonoBehaviour
     // Coroutine to keep track of dash cooldown
     IEnumerator DashCooldownRoutine()
     {
+        dashOffCooldownImage.fillAmount = 0.0f;
+        dashOnCooldownImage.fillAmount = 1.0f;
 
         yield return new WaitForSeconds(dashCooldown);
 
@@ -217,6 +237,15 @@ public class FPSController : MonoBehaviour
         }
 
         canDash = true;
+    }
+
+    void UIDashCooldown()
+    {
+        if(numberOfDashes < maxNumberOfDashes)
+        {
+            dashOffCooldownImage.fillAmount += 1 / dashCooldown * Time.deltaTime;
+            dashOnCooldownImage.fillAmount -= 1 / dashCooldown * Time.deltaTime;
+        }
     }
 
     // Fires the blaster. Fire1, left click, can be charged to fire a bigger shot
@@ -243,6 +272,7 @@ public class FPSController : MonoBehaviour
         // Clears the charge particles, plays the muzzle flash and shoots the projectile
         if (Input.GetButtonUp("Fire1") && canShoot)
         {
+
             StartCoroutine(WeaponCoolDown(weaponCooldown));
 
             chargeParticleSystem.Clear();
@@ -285,11 +315,13 @@ public class FPSController : MonoBehaviour
     // Similar to the blaster fire, but for rockets
     void ShootRocket()
     {
-        if (Input.GetButtonDown("Fire2") && canShoot)
+        if (Input.GetButtonDown("Fire2") && canShoot && rocketAmount >0)
         {
             StartCoroutine(WeaponCoolDown(weaponCooldown));
 
             DoTweenPunchBack();
+
+            RocketAmmoTracker();
 
             Ray ray = firstPersonCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
             RaycastHit raycastHit;
@@ -308,6 +340,17 @@ public class FPSController : MonoBehaviour
             var projectileObject = Instantiate(rocketProjectile, firePoint.position, tempQuaternion) as GameObject;
             projectileObject.GetComponent<Rigidbody>().velocity = (projectileDestination - firePoint.position).normalized * rocketProjectileSpeed;
         }
+    }
+
+    void RocketAmmoTracker()
+    {
+        --rocketAmount;
+
+        var position = rocketAmmoImage.localPosition;
+        position.y -= 0.6552f;
+        rocketAmmoImage.localPosition = position;
+
+        rocketAmmoText.text = rocketAmount.ToString();
     }
 
     IEnumerator WeaponCoolDown(float weaponCooldown)

@@ -111,10 +111,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 679, y: 492}
-  m_MaxSize: {x: 12004, y: 14042}
+  m_MinSize: {x: 677, y: 492}
+  m_MaxSize: {x: 12002, y: 14042}
   vertical: 0
-  controlID: 113
+  controlID: 122
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -136,10 +136,10 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 947
-  m_MinSize: {x: 679, y: 492}
-  m_MaxSize: {x: 12004, y: 14042}
+  m_MinSize: {x: 677, y: 492}
+  m_MaxSize: {x: 12002, y: 14042}
   vertical: 1
-  controlID: 114
+  controlID: 123
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -162,10 +162,10 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 676
-  m_MinSize: {x: 679, y: 221}
-  m_MaxSize: {x: 12004, y: 4021}
+  m_MinSize: {x: 677, y: 221}
+  m_MaxSize: {x: 12002, y: 4021}
   vertical: 0
-  controlID: 115
+  controlID: 124
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -309,9 +309,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 21.20885, y: -37.32105, z: 163.91174}
+    m_Target: {x: 34.803867, y: -41.48821, z: 179.24709}
     speed: 2
-    m_Value: {x: 21.20885, y: -37.32105, z: 163.91174}
+    m_Value: {x: 34.803867, y: -41.48821, z: 179.24709}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -357,13 +357,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 1
   m_Rotation:
-    m_Target: {x: 0.11995349, y: 0.04355634, z: -0.004830862, w: 0.99209887}
+    m_Target: {x: 0.11662943, y: 0.09416352, z: -0.0101915905, w: 0.9889416}
     speed: 2
-    m_Value: {x: 0.11991935, y: 0.043543946, z: -0.0048294873, w: 0.9918165}
+    m_Value: {x: 0.116580285, y: 0.095619164, z: -0.010363526, w: 0.9885133}
   m_Size:
-    m_Target: 122.9158
+    m_Target: 132.068
     speed: 2
-    m_Value: 122.9158
+    m_Value: 132.068
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -417,9 +417,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 8420ffff
-      m_LastClickedID: -57212
-      m_ExpandedIDs: 32f9ffff3af9ffffc4fafffffafaffff62fbffffc2330000d0330000fe33000014340000
+      m_SelectedIDs: 2afbffff
+      m_LastClickedID: -1238
+      m_ExpandedIDs: 48faffffd2faffff1efbffff2afbffff70fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -598,7 +598,7 @@ MonoBehaviour:
     m_PrefName: Preview_InspectorPreview
   m_PreviewWindow: {fileID: 0}
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 360
+  m_LastVerticalScrollValue: 0
 --- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -638,20 +638,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/VFX
+    - Assets/Images
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs/VFX
+  - Assets/Images
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\User\Documents\GitHub\Scuffed Metroid Prime
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 138}
-    m_SelectedIDs: f6370000
-    m_LastClickedID: 14326
-    m_ExpandedIDs: 00000000b2370000b4370000b6370000b8370000ba370000be370000c0370000c2370000c4370000c6370000ea370000fe370000003800000438000000ca9a3b
+    scrollPos: {x: 0, y: 94}
+    m_SelectedIDs: da370000
+    m_LastClickedID: 14298
+    m_ExpandedIDs: 00000000ba370000bc370000be370000c0370000c2370000c4370000c6370000c8370000ca370000cc370000ce370000d037000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -679,7 +679,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000b2370000b4370000b6370000b8370000ba370000bc370000be370000c0370000c2370000c4370000c6370000
+    m_ExpandedIDs: 00000000ba370000bc370000be370000c0370000c2370000c4370000c6370000c8370000ca370000cc370000ce370000d0370000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

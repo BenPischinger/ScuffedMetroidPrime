@@ -2614,8 +2614,8 @@ MonoBehaviour:
   gravity: 13
   maxNumberOfDashes: 1
   numberOfDashes: 0
-  dashSpeed: 45
-  dashDuration: 0.3
+  dashSpeed: 40
+  dashDuration: 0.2
   dashCooldown: 2
   mainPivot: {fileID: 1032570373}
   helmetPivot: {fileID: 1795269144}

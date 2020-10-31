@@ -2614,36 +2614,13 @@ MonoBehaviour:
   gravity: 13
   maxNumberOfDashes: 1
   numberOfDashes: 0
-  dashSpeed: 30
-  dashDuration: 0.25
+  dashSpeed: 45
+  dashDuration: 0.3
   dashCooldown: 2
-  firePoint: {fileID: 1887586703}
-  swayAmount: 0.1
-  maxSwayAmount: 0.2
-  smoothSwayAmount: 5
-  punchStrenght: 0.2
-  punchVibrato: 5
-  punchDuration: 0.2
-  punchElasticity: 0.5
-  weaponCooldown: 0.15
-  armCannon: {fileID: 5006512736661153376}
-  blasterProjectile: {fileID: 1026423936696386157, guid: 0b3a67444c039f2468fcac16471687d6,
-    type: 3}
-  chargeProjectile: {fileID: 2082117183}
-  muzzleVFX: {fileID: 1873724713}
-  blasterProjectileSpeed: 50
-  rocketProjectile: {fileID: 490036581634292633, guid: 2b1c93d0f89c2e7428dbd7e8df52a764,
-    type: 3}
-  rocketMuzzleVFX: {fileID: 1881534201}
-  rocketProjectileSpeed: 30
   mainPivot: {fileID: 1032570373}
   helmetPivot: {fileID: 1795269144}
-  chargeBarImage: {fileID: 1377592057}
-  chargeBarChargingImage: {fileID: 217609444}
   dashOffCooldownImage: {fileID: 800128692}
   dashOnCooldownImage: {fileID: 1229142000}
-  rocketAmmoImage: {fileID: 1480798577}
-  rocketAmmoText: {fileID: 1296884616}
 --- !u!143 &1562469775
 CharacterController:
   m_ObjectHideFlags: 0
@@ -3019,6 +2996,48 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1900836973}
   m_CullTransparentMesh: 0
+--- !u!1 &1987216098 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6309926159504599838, guid: 124933ee01220c7468538cb6e70f7df1,
+    type: 3}
+  m_PrefabInstance: {fileID: 2643808141351436141}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1987216099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1987216098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e07a9e931a66e247b03b5932d2e4b2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstPersonCamera: {fileID: 963194227}
+  firePoint: {fileID: 1887586703}
+  swayAmount: 0.1
+  maxSwayAmount: 0.2
+  smoothSwayAmount: 5
+  punchStrenght: 0.2
+  punchVibrato: 5
+  punchDuration: 0.3
+  punchElasticity: 0.5
+  armCannon: {fileID: 5006512736661153376}
+  blasterProjectile: {fileID: 1026423936696386157, guid: 0b3a67444c039f2468fcac16471687d6,
+    type: 3}
+  chargeProjectile: {fileID: 2082117183}
+  muzzleVFX: {fileID: 1873724713}
+  blasterProjectileSpeed: 60
+  weaponCooldown: 0.15
+  rocketProjectile: {fileID: 490036581634292633, guid: 2b1c93d0f89c2e7428dbd7e8df52a764,
+    type: 3}
+  rocketMuzzleVFX: {fileID: 1881534201}
+  rocketProjectileSpeed: 35
+  chargeBarImage: {fileID: 1377592057}
+  chargeBarChargingImage: {fileID: 217609444}
+  rocketAmmoImage: {fileID: 1480798577}
+  rocketAmmoText: {fileID: 1296884616}
 --- !u!1 &2082117183 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3266319396719655099, guid: 124933ee01220c7468538cb6e70f7df1,

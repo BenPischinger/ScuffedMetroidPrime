@@ -70,10 +70,11 @@
     <Compile Include="Assets\Images\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
     <Compile Include="Assets\Images\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
     <Compile Include="Assets\Images\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
-    <Compile Include="Assets\Scripts\FPSController.cs" />
-    <Compile Include="Assets\Scripts\FPSFollower.cs" />
-    <Compile Include="Assets\Scripts\HelmetController.cs" />
-    <Compile Include="Assets\Scripts\ProjectileController.cs" />
+    <Compile Include="Assets\Scripts\ArmCannonScript.cs" />
+    <Compile Include="Assets\Scripts\HelmetLerpScript.cs" />
+    <Compile Include="Assets\Scripts\ProjectileCollisionScript.cs" />
+    <Compile Include="Assets\Scripts\SamusFirstPersonScript.cs" />
+    <Compile Include="Assets\Scripts\ViewPortFollowerScript.cs" />
     <None Include="Assets\Fonts\SF-Archery-Black\ShyFonts Font License.txt" />
     <None Include="Assets\Images\Plugins\Demigiant\DOTween\readme.txt" />
     <Reference Include="UnityEngine">

@@ -3033,7 +3033,7 @@ MonoBehaviour:
   rocketProjectile: {fileID: 490036581634292633, guid: 2b1c93d0f89c2e7428dbd7e8df52a764,
     type: 3}
   rocketMuzzleVFX: {fileID: 1881534201}
-  rocketProjectileSpeed: 35
+  rocketProjectileSpeed: 40
   chargeBarImage: {fileID: 1377592057}
   chargeBarChargingImage: {fileID: 217609444}
   rocketAmmoImage: {fileID: 1480798577}

@@ -12,7 +12,6 @@ public class SamusFirstPersonScript : MonoBehaviour
     public Camera firstPersonCamera;
     float rotationX;
     float lookSensitivity = 2.0f;
-    public int FPS = 144;
 
     [Space]
 
@@ -50,7 +49,6 @@ public class SamusFirstPersonScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Application.targetFrameRate = FPS;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -66,8 +64,6 @@ public class SamusFirstPersonScript : MonoBehaviour
         {
             canDash = false;
         }
-
-        //tempQuaternion = samus.transform.rotation;
 
         UpdateView();
 

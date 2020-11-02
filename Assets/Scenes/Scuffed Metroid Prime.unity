@@ -2931,6 +2931,7 @@ GameObject:
   - component: {fileID: 1699508132}
   - component: {fileID: 1699508135}
   - component: {fileID: 1699508131}
+  - component: {fileID: 1699508136}
   m_Layer: 0
   m_Name: Morphball
   m_TagString: Untagged
@@ -2946,8 +2947,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1699508129}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.75, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -2967,9 +2968,11 @@ MonoBehaviour:
   cameraPivot: {fileID: 1482427634}
   morphballCamera: {fileID: 108136393}
   lookSensitifity: 2
-  speed: 10
-  jumpSpeed: 10
+  mass: 5
+  speed: 40
+  jumpSpeed: 6
   lookXLimit: 180
+  isGrounded: 0
 --- !u!135 &1699508132
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3046,6 +3049,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1699508136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699508129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d440031780d7e6b46984eccd010c83b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bomb: {fileID: 5977903501647747336, guid: 65eb6814d20eabf409a1c3379d8361d7, type: 3}
+  explosionVFX: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9,
+    type: 3}
+  explosionForce: 50
+  explosionUpforce: 50
+  explosionRadius: 10
+  explosionTimer: 1.5
 --- !u!1 &1795269143
 GameObject:
   m_ObjectHideFlags: 0
@@ -3353,6 +3375,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110099557468721942, guid: 124933ee01220c7468538cb6e70f7df1,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5277631554480444128, guid: 124933ee01220c7468538cb6e70f7df1,
         type: 3}

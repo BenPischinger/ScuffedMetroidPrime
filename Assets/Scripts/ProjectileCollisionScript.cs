@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ProjectileCollisionScript : MonoBehaviour
 {
+    public GameObject projectile;
     public GameObject impactVFX;
+    public ParticleSystem trail;
 
     private bool collided;
 
@@ -14,10 +16,17 @@ public class ProjectileCollisionScript : MonoBehaviour
         {
             collided = true;
 
-            var impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity) as GameObject;
+            var impact = Instantiate(impactVFX, collision.contacts[0].point, Quaternion.identity.normalized) as GameObject;
+
+            Destroy(projectile);
+
+            if (trail)
+            {
+                trail.Stop();
+            }
 
             Destroy(impact, 2);
-            Destroy(gameObject);
+            Destroy(gameObject, 2);
         }
     }
 }

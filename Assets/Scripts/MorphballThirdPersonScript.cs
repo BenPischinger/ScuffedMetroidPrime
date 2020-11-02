@@ -15,12 +15,13 @@ public class MorphballThirdPersonScript : MonoBehaviour
 
     [Header("Movement Settings")]
     public float lookSensitifity;
+    public float mass;
     public float speed;
     public float jumpSpeed;
     public float lookXLimit;
 
     bool canMove = true;
-    bool isGrounded;
+    public bool isGrounded = true;
 
     void Start()
     {
@@ -29,6 +30,8 @@ public class MorphballThirdPersonScript : MonoBehaviour
 
         morphballRigidBody = GetComponentInChildren<Rigidbody>();
         morphballCharacterController = GetComponent<CharacterController>();
+
+        morphballRigidBody.mass = mass;
 
         rotation.y = transform.eulerAngles.y;
     }
@@ -46,6 +49,13 @@ public class MorphballThirdPersonScript : MonoBehaviour
         cameraPivot.transform.eulerAngles = new Vector2(0, rotation.y);
 
         cameraPivot.transform.position = morphballRigidBody.transform.position;
+
+        if (Input.GetButtonDown("Jump") && canMove && isGrounded)
+        {
+            Vector3 tempVector = morphballRigidBody.velocity;
+            tempVector.y = jumpSpeed;
+            morphballRigidBody.velocity = tempVector;
+        }
     }
 
     void FixedUpdate()
@@ -62,29 +72,23 @@ public class MorphballThirdPersonScript : MonoBehaviour
 
             moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-            if (Input.GetButtonDown("Jump"))
-            {
-                Vector3 tempVector = morphballRigidBody.velocity;
-                tempVector.y = jumpSpeed;
-                morphballRigidBody.velocity = tempVector;
-            }
-
             morphballRigidBody.AddForce(moveDirection);
         }
     }
 
     void CheckIfGrounded()
     {
-        RaycastHit2D[] hits;
+        RaycastHit hit;
+        float distance = 1f;
+        Vector3 dir = new Vector3(0, -1);
 
-        //We raycast down 1 pixel from this position to check for a collider
-        Vector2 positionToCheck = transform.position;
-        hits = Physics2D.RaycastAll(positionToCheck, new Vector2(0, -1), 0.01f);
-
-        //if a collider was hit, we are grounded
-        if (hits.Length > 0)
+        if (Physics.Raycast(transform.position, dir, out hit, distance))
         {
             isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
         }
     }
 }

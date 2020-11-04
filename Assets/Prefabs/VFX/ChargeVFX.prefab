@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7894063100538638875}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &349197762998684613
 ParticleSystem:
@@ -4821,8 +4821,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5968af2dff98b974d8bcdeabf7329eb8, type: 2}
-  - {fileID: 2100000, guid: 5444ce6b74961824fa730f8f45a5845f, type: 2}
+  - {fileID: 2100000, guid: 0c54c1976e7792c41a475e0917aca310, type: 2}
+  - {fileID: 2100000, guid: 0c54c1976e7792c41a475e0917aca310, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4896,7 +4896,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7894063100538638875}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &8134915213344001793
 ParticleSystem:
@@ -9642,8 +9642,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5968af2dff98b974d8bcdeabf7329eb8, type: 2}
-  - {fileID: 2100000, guid: 5444ce6b74961824fa730f8f45a5845f, type: 2}
+  - {fileID: 2100000, guid: 0c54c1976e7792c41a475e0917aca310, type: 2}
+  - {fileID: 2100000, guid: 0c54c1976e7792c41a475e0917aca310, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9723,12 +9723,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 5444ce6b74961824fa730f8f45a5845f, type: 2}
+      objectReference: {fileID: 2100000, guid: 0c54c1976e7792c41a475e0917aca310, type: 2}
     - target: {fileID: 1806042801454460311, guid: 0b3a67444c039f2468fcac16471687d6,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 5968af2dff98b974d8bcdeabf7329eb8, type: 2}
+      objectReference: {fileID: 2100000, guid: 0c54c1976e7792c41a475e0917aca310, type: 2}
     - target: {fileID: 1806042801454460311, guid: 0b3a67444c039f2468fcac16471687d6,
         type: 3}
       propertyPath: m_UseCustomVertexStreams

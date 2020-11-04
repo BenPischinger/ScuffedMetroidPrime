@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class MorphballThirdPersonScript : MonoBehaviour
 {
-   
     Rigidbody morphballRigidBody;
-    CharacterController morphballCharacterController;
 
     public Transform cameraPivot;
     public Camera morphballCamera;
@@ -18,10 +16,11 @@ public class MorphballThirdPersonScript : MonoBehaviour
     public float mass;
     public float speed;
     public float jumpSpeed;
-    public float lookXLimit;
+    public float positivelookXLimit;
+    public float negativeLookXLimit;
 
     bool canMove = true;
-    public bool isGrounded = true;
+    bool isGrounded = true;
 
     void Start()
     {
@@ -29,8 +28,6 @@ public class MorphballThirdPersonScript : MonoBehaviour
         Cursor.visible = false;
 
         morphballRigidBody = GetComponentInChildren<Rigidbody>();
-        morphballCharacterController = GetComponent<CharacterController>();
-
         morphballRigidBody.mass = mass;
 
         rotation.y = transform.eulerAngles.y;
@@ -42,13 +39,12 @@ public class MorphballThirdPersonScript : MonoBehaviour
         rotation.y += Input.GetAxis("Mouse X") * lookSensitifity;
         rotation.x += -Input.GetAxis("Mouse Y") * lookSensitifity;
 
-        rotation.x = Mathf.Clamp(rotation.x, -lookXLimit, lookXLimit);
+        rotation.x = Mathf.Clamp(rotation.x, -negativeLookXLimit, positivelookXLimit);
 
-        morphballCamera.transform.localRotation = Quaternion.Euler(rotation.x, 0, 0);
+        cameraPivot.transform.eulerAngles = new Vector2(rotation.x, rotation.y);
 
-        cameraPivot.transform.eulerAngles = new Vector2(0, rotation.y);
+        cameraPivot.transform.position = GetComponent<Renderer>().bounds.center; 
 
-        cameraPivot.transform.position = morphballRigidBody.transform.position;
 
         if (Input.GetButtonDown("Jump") && canMove && isGrounded)
         {

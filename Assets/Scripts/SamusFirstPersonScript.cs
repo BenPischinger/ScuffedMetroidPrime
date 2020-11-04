@@ -42,9 +42,10 @@ public class SamusFirstPersonScript : MonoBehaviour
     public Image dashOffCooldownImage;
     public Image dashOnCooldownImage;
 
-    bool canMove = true;
-    bool canDoubleJump = false;
-    bool canDash = true;
+    [HideInInspector]
+    public bool canMove = true;
+    public bool canDoubleJump = false;
+    public bool canDash = true;
 
     // Start is called before the first frame update
     void Start()
@@ -63,13 +64,14 @@ public class SamusFirstPersonScript : MonoBehaviour
         if (numberOfDashes == 0)
         {
             canDash = false;
+
+            UIDashCooldown();
         }
 
         UpdateView();
 
         MovementController();
-
-        UIDashCooldown();
+        
     }
 
     void UpdateView()
@@ -130,7 +132,7 @@ public class SamusFirstPersonScript : MonoBehaviour
         {
             // Incresaes the movement speed for a split second to simulate a dash
             StartCoroutine(DashRoutine());
-            // Counts down the cooldown for the dashes
+            // Fills up the dashes and sets canDash to true after the dash cooldown
             StartCoroutine(DashCooldownRoutine());
         }
 
@@ -144,6 +146,12 @@ public class SamusFirstPersonScript : MonoBehaviour
     {
         --numberOfDashes;
 
+        if(numberOfDashes == 0)
+        {
+            dashOffCooldownImage.fillAmount = 0.0f;
+            dashOnCooldownImage.fillAmount = 1.0f;
+        }
+
         float currentMovementSpeed = movementSpeed;
         movementSpeed = dashSpeed;
 
@@ -154,10 +162,7 @@ public class SamusFirstPersonScript : MonoBehaviour
 
     // Coroutine to keep track of dash cooldown
     IEnumerator DashCooldownRoutine()
-    {
-        dashOffCooldownImage.fillAmount = 0.0f;
-        dashOnCooldownImage.fillAmount = 1.0f;
-
+    { 
         yield return new WaitForSeconds(dashCooldown);
 
         if (numberOfDashes < maxNumberOfDashes)
@@ -170,11 +175,14 @@ public class SamusFirstPersonScript : MonoBehaviour
 
     void UIDashCooldown()
     {
-        if(numberOfDashes < maxNumberOfDashes)
-        {
-            dashOffCooldownImage.fillAmount += 1 / dashCooldown * Time.deltaTime;
-            dashOnCooldownImage.fillAmount -= 1 / dashCooldown * Time.deltaTime;
-        }
+        dashOffCooldownImage.fillAmount += 1 / dashCooldown * Time.deltaTime;
+        dashOnCooldownImage.fillAmount -= 1 / dashCooldown * Time.deltaTime;
+    }
+
+    public void ResetUI()
+    {
+        dashOffCooldownImage.fillAmount = 1.0f;
+        dashOnCooldownImage.fillAmount = 0.0f;
     }
 
 }

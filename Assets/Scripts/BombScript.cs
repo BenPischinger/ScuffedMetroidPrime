@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class BombScript : MonoBehaviour
 {
-    //private GameObject bombObject;
-
     [Header("Bomb Settings")]
+    public GameObject morphballCamera;
     public GameObject bomb;
     public GameObject explosionVFX;
     public float explosionForce;
@@ -29,10 +28,10 @@ public class BombScript : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1") && canShoot)
         {
-            var bombObject = Instantiate(bomb, transform.position, Quaternion.identity) as GameObject;
+            var bombObject = Instantiate(bomb, GetComponent<Renderer>().bounds.center, Quaternion.identity) as GameObject;
 
             Physics.IgnoreCollision(bombObject.GetComponent<Collider>(), GetComponent<Collider>());
-
+            
             yield return new WaitForSeconds(explosionTimer);
 
             explosionPosition = bombObject.transform.position;

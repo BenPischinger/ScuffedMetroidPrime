@@ -173,12 +173,14 @@ public class SamusFirstPersonScript : MonoBehaviour
         canDash = true;
     }
 
+    // Used to animate the cooldown for the dash on the UI
     void UIDashCooldown()
     {
         dashOffCooldownImage.fillAmount += 1 / dashCooldown * Time.deltaTime;
         dashOnCooldownImage.fillAmount -= 1 / dashCooldown * Time.deltaTime;
     }
 
+    // Since the script and it's coroutines are stopped when switching from first person to morphball mode, this function has to be used to reset the UI upon switching back
     public void ResetUI()
     {
         dashOffCooldownImage.fillAmount = 1.0f;

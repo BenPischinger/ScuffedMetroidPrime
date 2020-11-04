@@ -7,7 +7,7 @@ public class HelmetLerpScript : MonoBehaviour
     public Vector2 amount;
     public float lerp;
 
-    // Update is called once per frame
+    // Short helmet swaying while looking around by lerping between two positions
     void Update()
     {
         float x = Input.GetAxis("Mouse X");

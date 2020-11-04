@@ -17,7 +17,6 @@ public class BombScript : MonoBehaviour
 
     private bool canShoot = true;
 
-    // Start is called before the first frame update
     void Update()
     {
         StartCoroutine(SpawnBomb());
@@ -42,6 +41,8 @@ public class BombScript : MonoBehaviour
         }
     }
 
+    // Check if there's anything destroyable within the radius of the explosion
+    // If so it spawns the destroyed version of the object and instantiates the explosion VFX at the spot of the bomb
     void Explode()
     {
         Collider[] collidersToDestroy = Physics.OverlapSphere(explosionPosition, explosionRadius);

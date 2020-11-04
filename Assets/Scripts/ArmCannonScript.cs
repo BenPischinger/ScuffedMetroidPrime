@@ -137,6 +137,7 @@ public class ArmCannonScript : MonoBehaviour
 
             chargedShotTimer = 0;
 
+            // Raycast to detect whether or not we hit something
             Ray ray = firstPersonCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
             RaycastHit raycastHit;
 
@@ -184,6 +185,7 @@ public class ArmCannonScript : MonoBehaviour
         }
     }
 
+    // Tracks rocket ammo and updates the UI accordingly by moving the rocket symbol down the ruler
     void RocketAmmoTracker()
     {
         --rocketAmount;
@@ -195,6 +197,7 @@ public class ArmCannonScript : MonoBehaviour
         rocketAmmoText.text = rocketAmount.ToString();
     }
 
+    // Adds a short cooldown to give the punchback time to reset it's position
     IEnumerator WeaponCoolDown(float weaponCooldown)
     {
         canShoot = false;
@@ -204,6 +207,7 @@ public class ArmCannonScript : MonoBehaviour
         canShoot = true;
     }
 
+    // Weapon way by lerping between two points to give an illusion of movement
     void WeaponSway()
     {
         float movementX = -Input.GetAxis("Mouse X") * swayAmount;
@@ -215,6 +219,7 @@ public class ArmCannonScript : MonoBehaviour
         armCannon.localPosition = Vector3.Lerp(armCannon.localPosition, swayPosition + armCannonInitialPos, Time.deltaTime * smoothSwayAmount);
     }
 
+    // Punch back of the weapon with DoTween plugin
     void DoTweenPunchBack()
     {
         Sequence doTweenSequence = DOTween.Sequence();

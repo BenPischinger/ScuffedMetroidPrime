@@ -14,13 +14,7 @@ public class ModeSwapScript : MonoBehaviour
     bool samusIsActive = true;
     bool canSwap = true;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-       
-    }
-
-    // Update is called once per frame
+    // Keeps samus and the morphball at the same position at all times and simply activates/deactives the character when Q is pressed
     void Update()
     {
         if (samusIsActive)
@@ -42,6 +36,8 @@ public class ModeSwapScript : MonoBehaviour
         }
     }
 
+    // Coroutine to add a cooldown to mode swapping
+    // Dashes and UI need to be reset here since the coroutine from the first person script is stopped upon switching
     IEnumerator SwapModes()
     {   
         canSwap = false;

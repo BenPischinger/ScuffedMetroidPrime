@@ -12,7 +12,6 @@ public class CameraCollisionScript : MonoBehaviour
     Transform parentTransform;
     float defaultDistance;
 
-    // Start is called before the first frame update
     void Start()
     {
         defaultPos = transform.localPosition;
@@ -21,7 +20,7 @@ public class CameraCollisionScript : MonoBehaviour
         defaultDistance = Vector3.Distance(defaultPos, Vector3.zero);
     }
 
-    // FixedUpdate for physics calculations
+    // Moves the camera when there's an object between the camera and the player so it doesn't clip through said objects
     void FixedUpdate()
     {
         Vector3 currentPos = defaultPos;

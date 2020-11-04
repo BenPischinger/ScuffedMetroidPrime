@@ -35,7 +35,7 @@ public class MorphballThirdPersonScript : MonoBehaviour
 
     private void Update()
     {
-
+        // Handles the mouse input to turn the camera around the morphball
         rotation.y += Input.GetAxis("Mouse X") * lookSensitifity;
         rotation.x += -Input.GetAxis("Mouse Y") * lookSensitifity;
 
@@ -43,9 +43,10 @@ public class MorphballThirdPersonScript : MonoBehaviour
 
         cameraPivot.transform.eulerAngles = new Vector2(rotation.x, rotation.y);
 
+        // Position of the camera is set to the center of the rendered object since the morphball pivot is not at the center
         cameraPivot.transform.position = GetComponent<Renderer>().bounds.center; 
 
-
+        // Pump by applying force in the Y direction
         if (Input.GetButtonDown("Jump") && canMove && isGrounded)
         {
             Vector3 tempVector = morphballRigidBody.velocity;
@@ -58,6 +59,7 @@ public class MorphballThirdPersonScript : MonoBehaviour
     {
         CheckIfGrounded();
 
+        // Moving the morphball by applying foce in the look directino of the camera
         if (canMove)
         {
             Vector3 forward = cameraPivot.transform.TransformDirection(Vector3.forward);
@@ -72,13 +74,14 @@ public class MorphballThirdPersonScript : MonoBehaviour
         }
     }
 
+    // Ground check by raycasting downwards to see if there's distance between the ground and the morphball
     void CheckIfGrounded()
     {
         RaycastHit hit;
-        float distance = 1f;
-        Vector3 dir = new Vector3(0, -1);
+        float distance = 1.0f;
+        Vector3 dir = new Vector3(0.0f, -1.0f, 0.0f);
 
-        if (Physics.Raycast(transform.position, dir, out hit, distance))
+        if (Physics.Raycast(GetComponent<Renderer>().bounds.center, dir, out hit, distance))
         {
             isGrounded = true;
         }

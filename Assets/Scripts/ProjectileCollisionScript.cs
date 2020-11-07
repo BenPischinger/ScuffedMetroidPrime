@@ -8,7 +8,17 @@ public class ProjectileCollisionScript : MonoBehaviour
     public GameObject impactVFX;
     public ParticleSystem trail;
 
+    private bool wasDestroyed;
+
     private bool collided;
+
+    private void FixedUpdate()
+    {
+        if (!wasDestroyed)
+        {
+            StartCoroutine(DestroyMissedProjectile());
+        }
+    }
 
     // Checks if the projectile collided with anything other than the player or a projectile/itself
     // Instantiates the impact VFX if it hit something
@@ -30,6 +40,16 @@ public class ProjectileCollisionScript : MonoBehaviour
 
             Destroy(impact, 2);
             Destroy(gameObject, 2);
+
+            wasDestroyed = true;
+
         }
+    }
+
+    IEnumerator DestroyMissedProjectile()
+    {
+        yield return new WaitForSeconds(5.0f);
+
+        Destroy(gameObject);
     }
 }

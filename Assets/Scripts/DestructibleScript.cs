@@ -14,8 +14,17 @@ public class DestructibleScript : MonoBehaviour
         if (destroyedVersion != null)
         {
             Instantiate(destroyedVersion, transform.position, transform.rotation);
+
+            StartCoroutine(DestroyDestroyedObject());
         }
 
         Destroy(gameObject);
+    }
+
+    IEnumerator DestroyDestroyedObject()
+    {
+        yield return new WaitForSeconds(10.0f);
+
+        Destroy(destroyedVersion);
     }
 }

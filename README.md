@@ -4,6 +4,7 @@
  
  At the moment if features a first-person mode and a third-person morphball mode.
  
+ Check it out on youtube: https://youtu.be/AUW6ruCYIqg
  
   ## First-Person Mode Features
 <p align="center">

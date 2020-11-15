@@ -7,10 +7,45 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4211966690663124808, guid: 726881490354c5647b50e983f0c31d1b,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211966690687717730, guid: 726881490354c5647b50e983f0c31d1b,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211966691002422701, guid: 726881490354c5647b50e983f0c31d1b,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211966691281001610, guid: 726881490354c5647b50e983f0c31d1b,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211966691456839706, guid: 726881490354c5647b50e983f0c31d1b,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211966691520542362, guid: 726881490354c5647b50e983f0c31d1b,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211966691620117414, guid: 726881490354c5647b50e983f0c31d1b,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4211966691646048584, guid: 726881490354c5647b50e983f0c31d1b,
         type: 3}
       propertyPath: m_Name
-      value: Destrucible Floor
+      value: Destrucible Floor Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4211966691646048587, guid: 726881490354c5647b50e983f0c31d1b,
         type: 3}
@@ -66,6 +101,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211966691775587139, guid: 726881490354c5647b50e983f0c31d1b,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211966692185925269, guid: 726881490354c5647b50e983f0c31d1b,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 726881490354c5647b50e983f0c31d1b, type: 3}
